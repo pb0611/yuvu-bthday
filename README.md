@@ -1,7 +1,8 @@
 ![dinasaurus](https://github.com/user-attachments/assets/6de91006-8744-4251-a20e-e3e2d96068d2)
 ![spiderman](https://github.com/user-attachments/assets/7c51af1c-d7f6-4a39-8d08-51441204411d)
 [happy-birthday-368842.mp3](https://github.com/user-attachments/files/23287035/happy-birthday-368842.mp3)
-[code.txt](https://github.com/user-attachments/files/23287036/code.txt)
+[code.txt](https://github.com/user-attachments/fi![cake-with-candle](https://github.com/user-attachments/assets/f8b47bc0-7f59-4219-b150-0e67b5080a5c)
+les/23287036/code.txt)
 <!doctype html>
 <html lang="en">
 <head>
@@ -213,18 +214,7 @@
         countdownEl.textContent = "🎉 It's Yuvaan's Birthday! 🎉";
       }
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
     // Cake click animation
-    const cake = document.getElementById('cake');
-    if(cake){
-      cake.addEventListener('click', () => {
-        cake.style.transform = 'rotate(-15deg)';
-        setTimeout(()=>{cake.style.transform='rotate(0deg)';},200);
-      });
-    }
-
     // Save card (simple print fallback)
     document.getElementById('downloadBtn').addEventListener('click', async () => {
       alert('To save the card, take a screenshot or use the browser print dialog.');
