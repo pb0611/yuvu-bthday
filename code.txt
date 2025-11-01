@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy 7th Birthday, Yuvaan!</title>
+  <style>
+    :root{
+      --bg:#fff7e6;
+      --card:#ffffff;
+      --accent:#ff6b6b;
+      --muted:#666;
+      --shadow: 0 8px 30px rgba(16,24,40,0.08);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 10% 10%, #fff3d9 0%, var(--bg) 40%),
+                  linear-gradient(120deg,#ffe6f0 0%, #e6f7ff 100%);
+      padding:24px;
+    }
+    .card{
+      width:100%;
+      max-width:920px;
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:28px;
+      text-align:center;
+      position:relative;
+      overflow:visible;
+    }
+    h1{
+      margin:6px 0 8px;
+      font-size:38px;
+      letter-spacing:-0.5px;
+    }
+    .subtitle{color:var(--muted); margin:0 0 18px; font-size:16px;}
+    .from{margin:8px 0 22px; font-weight:600; color:#222;}
+    .controls{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:linear-gradient(180deg,#fff 0%,#f2f2f2 100%);
+      border:1px solid rgba(0,0,0,0.06);
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(180deg,#ffe6e6 0%,#ffdede 100%);
+    }
+    .characters{
+      display:flex;
+      justify-content: center;
+      gap:20px;
+      margin-top:6px;
+      flex-wrap:wrap;
+    }
+    .char{
+      width:150px;
+      background:linear-gradient(180deg, #fff, #fbfbfb);
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 8px 20px rgba(16,24,40,0.04);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+    }
+    .char img{
+      width:86px; height:86px; object-fit:cover; border-radius:10px;
+      background:#f3f3f3;
+    }
+    .char .label{font-weight:700;}
+    .hint{font-size:13px;color:var(--muted); margin-top:10px;}
+    .confetti{
+      position:fixed;
+      pointer-events:none;
+      left:0;top:0;right:0;bottom:0;
+      overflow:visible;
+      z-index:9999;
+    }
+    footer{margin-top:18px;color:var(--muted); font-size:13px;}
+    #countdown{font-size:18px;color:#ff6b6b;margin:12px 0;font-weight:600;}
+    #cake{width:120px;cursor:pointer;margin-top:20px;transition: transform 0.2s;}
+    @media (max-width:520px){
+      h1{font-size:28px}
+      .char{width:120px}
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <h1>Happy 7th Birthday, Yuvaan!</h1>
+    <p class="subtitle">You're amazing, brave, and super cool!</p>
+    <p class="from">With love, from <strong>Poonam Maa</strong></p>
+
+    <div id="countdown"></div>
+
+    <div class="controls" aria-hidden="false">
+      <button id="playBtn" class="btn">Play Birthday Music</button>
+      <button id="confettiBtn" class="btn">Throw Confetti</button>
+      <button id="downloadBtn" class="btn">Save as PNG</button>
+    </div>
+
+    <div class="characters" aria-label="characters">
+      <div class="char">
+        <img src="dinosaur.png" alt="Dinosaur" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div style="display:none;font-size:48px" aria-hidden="true">🦖</div>
+        <div class="label">Dinosaur</div>
+      </div>
+      <div class="char">
+        <img src="spiderman.png" alt="Spiderman" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+        <div style="display:none;font-size:48px" aria-hidden="true">🕷️</div>
+        <div class="label">Spiderman</div>
+      </div>
+    </div>
+
+    <img id="cake" src="cake.png" alt="Birthday Cake" onerror="this.src='';this.insertAdjacentText('afterend','🎂');">
+
+    <p class="hint">Tip: To use your own images/music, place <code>dinosaur.png</code>, <code>spiderman.png</code>, <code>cake.png</code>, and <code>music.mp3</code> in the same folder as this file.</p>
+    <footer>Made with ❤️ — open the file locally or upload to Netlify to share.</footer>
+  </div>
+
+  <div class="confetti" id="confettiRoot" aria-hidden="true"></div>
+
+  <audio id="bgMusic" src="music.mp3" preload="auto"></audio>
+
+  <script>
+    // Music button
+    const playBtn = document.getElementById('playBtn');
+    const music = document.getElementById('bgMusic');
+    let isPlaying = false;
+    playBtn.addEventListener('click', async () => {
+      try {
+        if (!isPlaying){
+          await music.play();
+          playBtn.textContent = 'Pause Music';
+          isPlaying = true;
+        } else {
+          music.pause();
+          playBtn.textContent = 'Play Birthday Music';
+          isPlaying = false;
+        }
+      } catch(err){
+        alert('No music file found. To play, add music.mp3 to the folder.');
+      }
+    });
+
+    // Confetti generator
+    const confettiRoot = document.getElementById('confettiRoot');
+    function launchConfetti(count = 80){
+      const colors = ['#ff6b6b','#ffd93d','#6be3b7','#6bb8ff','#c78bff','#ff9ec1'];
+      for (let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.style.position='absolute';
+        el.style.left = Math.random()*100 + '%';
+        el.style.top = '-10px';
+        el.style.width = (6 + Math.random()*10) + 'px';
+        el.style.height = (10 + Math.random()*14) + 'px';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.opacity = (0.7 + Math.random()*0.3);
+        el.style.transform = 'rotate(' + Math.floor(Math.random()*360) + 'deg)';
+        el.style.borderRadius = '2px';
+        el.style.willChange = 'transform, top, opacity';
+        confettiRoot.appendChild(el);
+
+        const duration = 2000 + Math.random()*2000;
+        const horizontalShift = (Math.random()*200 - 100);
+        const start = performance.now();
+        (function animate(now){
+          const t = (now - start) / duration;
+          if (t < 1){
+            el.style.top = (t * (window.innerHeight + 200) - 10) + 'px';
+            el.style.transform = 'translateX(' + (horizontalShift * t) + 'px) rotate(' + (t*720) + 'deg)';
+            requestAnimationFrame(animate);
+          } else { el.remove(); }
+        })(start);
+      }
+    }
+    document.getElementById('confettiBtn').addEventListener('click', ()=> launchConfetti(120));
+
+    // Launch confetti automatically on load
+    window.addEventListener('load', ()=> launchConfetti(80));
+
+    // Countdown
+    const birthday = new Date('2025-11-10T00:00:00'); // replace with actual birthday
+    const countdownEl = document.getElementById('countdown');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = birthday - now;
+      if(diff > 0){
+        const days = Math.floor(diff / (1000*60*60*24));
+        const hours = Math.floor((diff/(1000*60*60)) % 24);
+        const mins = Math.floor((diff/(1000*60)) % 60);
+        const secs = Math.floor((diff/1000) % 60);
+        countdownEl.textContent = `Birthday in ${days}d ${hours}h ${mins}m ${secs}s 🎉`;
+      } else {
+        countdownEl.textContent = "🎉 It's Yuvaan's Birthday! 🎉";
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Cake click animation
+    const cake = document.getElementById('cake');
+    if(cake){
+      cake.addEventListener('click', () => {
+        cake.style.transform = 'rotate(-15deg)';
+        setTimeout(()=>{cake.style.transform='rotate(0deg)';},200);
+      });
+    }
+
+    // Save card (simple print fallback)
+    document.getElementById('downloadBtn').addEventListener('click', async () => {
+      alert('To save the card, take a screenshot or use the browser print dialog.');
+      window.print();
+    });
+  </script>
+</body>
+</html>
