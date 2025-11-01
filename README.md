@@ -1,9 +1,8 @@
 ![dinasaurus](https://github.com/user-attachments/assets/6de91006-8744-4251-a20e-e3e2d96068d2)
 ![spiderman](https://github.com/user-attachments/assets/7c51af1c-d7f6-4a39-8d08-51441204411d)
-[happy-birthday-368842.mp3](https://github.com/user-attachments/files/23287035/happy-birthday-368842.mp3)
-[code.txt](https://github.com/user-attachments/fi!
-[cake-with-candle](https://github.com/user-attachments/assets/f8b47bc0-7f59-4219-b150-0e67b5080a5c)
-les/23287036/code.txt)
+![happy-birthday-368842.mp3](https://github.com/user-attachments/files/23287035/happy-birthday-368842.mp3)
+![cake-with-candle](https://github.com/user-attachments/assets/f8b47bc0-7f59-4219-b150-0e67b5080a5c)
+![code.txt](https://github.com/user-attachments/files/23287036/code.txt)
 <!doctype html>
 <html lang="en">
 <head>
