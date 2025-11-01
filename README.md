@@ -1,7 +1,8 @@
 ![dinasaurus](https://github.com/user-attachments/assets/6de91006-8744-4251-a20e-e3e2d96068d2)
 ![spiderman](https://github.com/user-attachments/assets/7c51af1c-d7f6-4a39-8d08-51441204411d)
 [happy-birthday-368842.mp3](https://github.com/user-attachments/files/23287035/happy-birthday-368842.mp3)
-[code.txt](https://github.com/user-attachments/fi![cake-with-candle](https://github.com/user-attachments/assets/f8b47bc0-7f59-4219-b150-0e67b5080a5c)
+[code.txt](https://github.com/user-attachments/fi!
+[cake-with-candle](https://github.com/user-attachments/assets/f8b47bc0-7f59-4219-b150-0e67b5080a5c)
 les/23287036/code.txt)
 <!doctype html>
 <html lang="en">
@@ -97,7 +98,6 @@ les/23287036/code.txt)
     }
     footer{margin-top:18px;color:var(--muted); font-size:13px;}
     #countdown{font-size:18px;color:#ff6b6b;margin:12px 0;font-weight:600;}
-    #cake{width:120px;cursor:pointer;margin-top:20px;transition: transform 0.2s;}
     @media (max-width:520px){
       h1{font-size:28px}
       .char{width:120px}
@@ -131,10 +131,14 @@ les/23287036/code.txt)
       </div>
     </div>
 
-    <img id="cake" src="cake.png" alt="Birthday Cake" onerror="this.src='';this.insertAdjacentText('afterend','🎂');">
+    <!-- Fixed Cake Section -->
+    <div id="cakeContainer" style="margin-top:20px;">
+      <img id="cake" src="cake.png" alt="Birthday Cake" style="width:120px;cursor:pointer;display:block;margin:0 auto;">
+      <div id="cakeFallback" style="font-size:48px;text-align:center;display:none;">🎂</div>
+    </div>
 
     <p class="hint">Tip: To use your own images/music, place <code>dinosaur.png</code>, <code>spiderman.png</code>, <code>cake.png</code>, and <code>music.mp3</code> in the same folder as this file.</p>
-    <footer>Made with ❤️ — open the file locally or upload to Netlify to share.</footer>
+    <footer>Made with ❤️ — open the file locally or upload to Netlify/GitHub Pages to share.</footer>
   </div>
 
   <div class="confetti" id="confettiRoot" aria-hidden="true"></div>
@@ -194,12 +198,10 @@ les/23287036/code.txt)
       }
     }
     document.getElementById('confettiBtn').addEventListener('click', ()=> launchConfetti(120));
-
-    // Launch confetti automatically on load
     window.addEventListener('load', ()=> launchConfetti(80));
 
     // Countdown
-    const birthday = new Date('2025-11-10T00:00:00'); // replace with actual birthday
+    const birthday = new Date('2025-11-10T00:00:00'); // Replace with actual birthday
     const countdownEl = document.getElementById('countdown');
     function updateCountdown() {
       const now = new Date();
@@ -214,8 +216,27 @@ les/23287036/code.txt)
         countdownEl.textContent = "🎉 It's Yuvaan's Birthday! 🎉";
       }
     }
-    // Cake click animation
-    // Save card (simple print fallback)
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Cake logic (image or single emoji)
+    const cakeImg = document.getElementById('cake');
+    const cakeFallback = document.getElementById('cakeFallback');
+
+    cakeImg.onerror = () => {
+      cakeImg.style.display = 'none';
+      cakeFallback.style.display = 'block';
+    };
+
+    function wiggleCake(el){
+      el.style.transform = 'rotate(-15deg)';
+      setTimeout(()=>{el.style.transform='rotate(0deg)';},200);
+    }
+
+    cakeImg.addEventListener('click', () => wiggleCake(cakeImg));
+    cakeFallback.addEventListener('click', () => wiggleCake(cakeFallback));
+
+    // Save card fallback
     document.getElementById('downloadBtn').addEventListener('click', async () => {
       alert('To save the card, take a screenshot or use the browser print dialog.');
       window.print();
