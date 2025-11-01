@@ -129,13 +129,6 @@
         <div class="label">Spiderman</div>
       </div>
     </div>
-
-    <!-- Fixed Cake Section -->
-    <div id="cakeContainer" style="margin-top:20px;">
-      <img id="cake" src="cake.png" alt="Birthday Cake" style="width:120px;cursor:pointer;display:block;margin:0 auto;">
-      <div id="cakeFallback" style="font-size:48px;text-align:center;display:none;">🎂</div>
-    </div>
-
     <p class="hint">Tip: To use your own images/music, place <code>dinosaur.png</code>, <code>spiderman.png</code>, <code>cake.png</code>, and <code>music.mp3</code> in the same folder as this file.</p>
     <footer>Made with ❤️ — open the file locally or upload to Netlify/GitHub Pages to share.</footer>
   </div>
@@ -218,22 +211,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Cake logic (image or single emoji)
-    const cakeImg = document.getElementById('cake');
-    const cakeFallback = document.getElementById('cakeFallback');
 
-    cakeImg.onerror = () => {
-      cakeImg.style.display = 'none';
-      cakeFallback.style.display = 'block';
-    };
-
-    function wiggleCake(el){
-      el.style.transform = 'rotate(-15deg)';
-      setTimeout(()=>{el.style.transform='rotate(0deg)';},200);
-    }
-
-    cakeImg.addEventListener('click', () => wiggleCake(cakeImg));
-    cakeFallback.addEventListener('click', () => wiggleCake(cakeFallback));
 
     // Save card fallback
     document.getElementById('downloadBtn').addEventListener('click', async () => {
